@@ -10,22 +10,22 @@ declare(strict_types=1);
 namespace Ixocreate\Cache;
 
 use Ixocreate\Contract\Cache\CacheableInterface;
-use Ixocreate\Contract\Cache\CachePoolReceiverInterface;
+use Psr\Container\ContainerInterface;
 
 final class CacheManager
 {
     /**
-     * @var CachePoolReceiverInterface
+     * @var ContainerInterface
      */
-    private $cachePoolReceiver;
+    private $cacheContainer;
 
     /**
      * CacheManager constructor.
-     * @param CachePoolReceiverInterface $cachePoolReceiver
+     * @param ContainerInterface $cacheContainer
      */
-    public function __construct(CachePoolReceiverInterface $cachePoolReceiver)
+    public function __construct(ContainerInterface $cacheContainer)
     {
-        $this->cachePoolReceiver = $cachePoolReceiver;
+        $this->cacheContainer = $cacheContainer;
     }
 
     /**
@@ -35,10 +35,9 @@ final class CacheManager
      */
     public function fetch(CacheableInterface $cacheable)
     {
-        $cacheItemPool = $this->cachePoolReceiver->get($cacheable->cacheName());
-        $cache = new Cache($cacheItemPool);
+        $cacheItemPool = $this->cacheContainer->get($cacheable->cacheName());
 
-        return $cache->retrieve(
+        return (new Cache($cacheItemPool))->retrieve(
             $cacheable->cacheKey(),
             function () use ($cacheable) {
                 return $cacheable->uncachedResult();
