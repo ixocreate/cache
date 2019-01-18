@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace Ixocreate\Cache;
 
 use Ixocreate\Contract\Cache\CacheInterface;
+use Ixocreate\Contract\Cache\PruneableInterface;
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Component\Cache\PruneableInterface;
 
 final class Cache implements CacheInterface
 {
@@ -180,8 +180,6 @@ final class Cache implements CacheInterface
             $this->cacheItemPool->prune();
             return;
         }
-
-        $this->clear();
     }
 
     /**
