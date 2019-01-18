@@ -12,7 +12,9 @@
   "prefer-stable": true,
   "require": {
     "php": "^7.1",
-    "ixocreate/cache-contract": "dev-develop"
+    "ixocreate/cache-contract": "dev-develop",
+    "psr/container": "~1.0",
+    "symfony/cache": "^4.2"
   },
   "require-dev": {
     "ext-pdo": "*",
