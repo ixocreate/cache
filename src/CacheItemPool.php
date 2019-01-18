@@ -9,11 +9,15 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
+use Ixocreate\Contract\Cache\PruneableInterface;
+use Ixocreate\Contract\Cache\ResetableInterface;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\ResettableInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class CacheItemPool implements CacheItemPoolInterface
+final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface, ResetableInterface
 {
     /**
      * @var CacheItemPoolInterface
@@ -176,5 +180,31 @@ final class CacheItemPool implements CacheItemPoolInterface
     public function commit()
     {
         return $this->cacheItemPool->commit();
+    }
+
+    /**
+     *
+     */
+    public function prune(): void
+    {
+        if ($this->cacheItemPool instanceof \Symfony\Component\Cache\PruneableInterface) {
+            $this->cacheItemPool->prune();
+        } elseif ($this->cacheItemPool instanceof PruneableInterface) {
+            $this->cacheItemPool->prune();
+        }
+    }
+
+    /**
+     *
+     */
+    public function reset(): void
+    {
+        if ($this->cacheItemPool instanceof ResetableInterface) {
+            $this->cacheItemPool->reset();
+        } elseif ($this->cacheItemPool instanceof ResettableInterface) {
+            $this->cacheItemPool->reset();
+        } elseif ($this->cacheItemPool instanceof ResetInterface) {
+            $this->cacheItemPool->reset();
+        }
     }
 }
