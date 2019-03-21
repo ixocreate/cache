@@ -30,12 +30,23 @@ final class CacheManager
 
     /**
      * @param CacheableInterface $cacheable
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @param bool $force
      * @return mixed
+     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function fetch(CacheableInterface $cacheable)
+    public function fetch(CacheableInterface $cacheable, bool $force = false)
     {
         $cacheItemPool = $this->cacheContainer->get($cacheable->cacheName());
+
+        if ($force === true) {
+            $result = $cacheable->uncachedResult();
+            (new Cache($cacheItemPool))->put(
+                $cacheable->cacheKey(),
+                $result,
+                $cacheable->cacheTtl()
+            );
+            return $result;
+        }
 
         return (new Cache($cacheItemPool))->retrieve(
             $cacheable->cacheKey(),
