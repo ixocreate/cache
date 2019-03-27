@@ -31,8 +31,8 @@ final class CacheManager
     /**
      * @param CacheableInterface $cacheable
      * @param bool $force
-     * @return mixed
      * @throws \Psr\Cache\InvalidArgumentException
+     * @return mixed
      */
     public function fetch(CacheableInterface $cacheable, bool $force = false)
     {
