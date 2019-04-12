@@ -34,6 +34,14 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
     }
 
     /**
+     * @return CacheItemPoolInterface
+     */
+    public function innerPool(): CacheItemPoolInterface
+    {
+        return $this->cacheItemPool;
+    }
+
+    /**
      * Returns a Cache Item representing the specified key.
      *
      * This method must always return a CacheItemInterface object, even in case of
