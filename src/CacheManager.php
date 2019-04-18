@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-use Ixocreate\Cache\CacheableInterface;
 use Psr\Container\ContainerInterface;
 
 final class CacheManager

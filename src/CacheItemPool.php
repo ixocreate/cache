@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-use Ixocreate\Cache\PruneableInterface;
-use Ixocreate\Cache\ResetableInterface;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
