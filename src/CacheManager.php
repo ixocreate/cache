@@ -20,6 +20,7 @@ final class CacheManager
 
     /**
      * CacheManager constructor.
+     *
      * @param ContainerInterface $cacheContainer
      */
     public function __construct(ContainerInterface $cacheContainer)

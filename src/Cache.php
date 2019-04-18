@@ -20,6 +20,7 @@ final class Cache implements CacheInterface
 
     /**
      * Cache constructor.
+     *
      * @param CacheItemPoolInterface $cacheItemPool
      */
     public function __construct(CacheItemPoolInterface $cacheItemPool)
