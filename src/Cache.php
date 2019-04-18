@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-use Ixocreate\Contract\Cache\CacheInterface;
-use Ixocreate\Contract\Cache\PruneableInterface;
+use Ixocreate\Cache\CacheInterface;
+use Ixocreate\Cache\PruneableInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
 final class Cache implements CacheInterface

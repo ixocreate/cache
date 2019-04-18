@@ -1,34 +1,33 @@
 {
-  "name": "ixocreate/cache",
-  "description": "Caching library for IXOCREATE",
-  "license": "MIT",
-  "type": "library",
-  "authors": [
-    {
-      "name": "IXOCREATE"
+    "name": "ixocreate/cache",
+    "description": "IXOCREATE Cache Library",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "IXOCREATE"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.1",
+        "psr/container": "~1.0",
+        "symfony/cache": "^4.2"
+    },
+    "require-dev": {
+        "ext-pdo": "*",
+        "doctrine/dbal": "^2.9",
+        "ixocreate/coding-standard": "^1.0",
+        "php-coveralls/php-coveralls": "^2.1",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ixocreate\\Cache\\": "src/"
+        }
+    },
+    "scripts": {
+        "fix-cs": "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --config vendor/ixocreate/coding-standard/.php_cs"
     }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "php": "^7.1",
-    "ixocreate/cache-contract": "dev-develop",
-    "psr/container": "~1.0",
-    "symfony/cache": "^4.2"
-  },
-  "require-dev": {
-    "ext-pdo": "*",
-    "doctrine/dbal": "^2.9",
-    "ixocreate/coding-standard": "^1.0.1",
-    "php-coveralls/php-coveralls": "^2.1",
-    "phpunit/phpunit": "^7.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Ixocreate\\Cache\\": "src/"
-    }
-  },
-  "scripts": {
-    "fix-cs": "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --config vendor/ixocreate/coding-standard/.php_cs"
-  }
 }
