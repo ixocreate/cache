@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-use Ixocreate\Contract\Cache\CacheInterface;
-use Ixocreate\Contract\Cache\PruneableInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
 final class Cache implements CacheInterface
@@ -22,6 +20,7 @@ final class Cache implements CacheInterface
 
     /**
      * Cache constructor.
+     *
      * @param CacheItemPoolInterface $cacheItemPool
      */
     public function __construct(CacheItemPoolInterface $cacheItemPool)

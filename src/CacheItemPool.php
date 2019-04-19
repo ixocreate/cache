@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-use Ixocreate\Contract\Cache\PruneableInterface;
-use Ixocreate\Contract\Cache\ResetableInterface;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -26,6 +24,7 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
 
     /**
      * CachePool constructor.
+     *
      * @param CacheItemPoolInterface $cacheItemPool
      */
     public function __construct(CacheItemPoolInterface $cacheItemPool)
@@ -43,17 +42,14 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
 
     /**
      * Returns a Cache Item representing the specified key.
-     *
      * This method must always return a CacheItemInterface object, even in case of
      * a cache miss. It MUST NOT return null.
      *
      * @param string $key
      *   The key for which to return the corresponding Cache Item
-     *
      * @throws invalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown
-     *
      * @return cacheItemInterface
      *   The corresponding Cache Item
      */
@@ -67,36 +63,31 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
      *
      * @param string[] $keys
      *   An indexed array of keys of items to retrieve
-     *
      * @throws invalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown
-     *
      * @return array|\Traversable
      *   A traversable collection of Cache Items keyed by the cache keys of
      *   each item. A Cache item will be returned for each key, even if that
      *   key is not found. However, if no keys are specified then an empty
      *   traversable MUST be returned instead.
      */
-    public function getItems(array $keys = array())
+    public function getItems(array $keys = [])
     {
         return $this->cacheItemPool->getItems($keys);
     }
 
     /**
      * Confirms if the cache contains specified cache item.
-     *
      * Note: This method MAY avoid retrieving the cached value for performance reasons.
      * This could result in a race condition with CacheItemInterface::get(). To avoid
      * such situation use CacheItemInterface::isHit() instead.
      *
      * @param string $key
      *   The key for which to check existence
-     *
      * @throws invalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown
-     *
      * @return bool
      *   True if item exists in the cache, false otherwise
      */
@@ -121,11 +112,9 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
      *
      * @param string $key
      *   The key to delete
-     *
      * @throws invalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown
-     *
      * @return bool
      *   True if the item was successfully removed. False if there was an error.
      */
@@ -142,7 +131,6 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
      * @throws invalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown
-     *
      * @return bool
      *   True if the items were successfully removed. False if there was an error.
      */
@@ -156,7 +144,6 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
      *
      * @param cacheItemInterface $item
      *   The cache item to save
-     *
      * @return bool
      *   True if the item was successfully persisted. False if there was an error.
      */
@@ -170,7 +157,6 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
      *
      * @param cacheItemInterface $item
      *   The cache item to save
-     *
      * @return bool
      *   False if the item could not be queued or if a commit was attempted and failed. True otherwise.
      */

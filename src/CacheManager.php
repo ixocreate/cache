@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-use Ixocreate\Contract\Cache\CacheableInterface;
 use Psr\Container\ContainerInterface;
 
 final class CacheManager
@@ -21,6 +20,7 @@ final class CacheManager
 
     /**
      * CacheManager constructor.
+     *
      * @param ContainerInterface $cacheContainer
      */
     public function __construct(ContainerInterface $cacheContainer)
