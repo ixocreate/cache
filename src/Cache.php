@@ -163,9 +163,9 @@ final class Cache implements CacheInterface
     }
 
     /**
-     *
+     * @return bool
      */
-    public function clear(): void
+    public function clear(): bool
     {
         $this->cacheItemPool->clear();
     }

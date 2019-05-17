@@ -86,9 +86,9 @@ interface CacheInterface
     public function deleteMultiple(array $keys): void;
 
     /**
-     *
+     * @return bool
      */
-    public function clear(): void;
+    public function clear(): bool;
 
     /**
      *
