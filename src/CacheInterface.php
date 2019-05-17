@@ -111,7 +111,7 @@ interface CacheInterface
     public function putMultipleDeferred(array $values, array $ttl = []): void;
 
     /**
-     *
+     * @return bool
      */
-    public function commit(): void;
+    public function commit(): bool;
 }

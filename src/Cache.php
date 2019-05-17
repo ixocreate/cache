@@ -208,9 +208,9 @@ final class Cache implements CacheInterface
     }
 
     /**
-     *
+     * @return bool
      */
-    public function commit(): void
+    public function commit(): bool
     {
         $this->cacheItemPool->commit();
     }
