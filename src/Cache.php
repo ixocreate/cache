@@ -167,7 +167,7 @@ final class Cache implements CacheInterface
      */
     public function clear(): bool
     {
-        $this->cacheItemPool->clear();
+        return $this->cacheItemPool->clear();
     }
 
     /**
@@ -212,6 +212,6 @@ final class Cache implements CacheInterface
      */
     public function commit(): bool
     {
-        $this->cacheItemPool->commit();
+        return $this->cacheItemPool->commit();
     }
 }
