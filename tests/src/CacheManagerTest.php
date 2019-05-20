@@ -45,7 +45,7 @@ class CacheManagerTest extends TestCase
 
         $pool = [
             'fooTrue' => $cacheItemPoolTrue,
-            'fooFalse' => $cacheItemPoolFalse
+            'fooFalse' => $cacheItemPoolFalse,
         ];
 
         $container = $this->createMock(ContainerInterface::class);
@@ -78,7 +78,9 @@ class CacheManagerTest extends TestCase
         });
 
         $this->assertSame(
-            CacheableInterface::class . ' Callback!', $this->cacheManager->fetch($cacheable, false));
+            CacheableInterface::class . ' Callback!',
+            $this->cacheManager->fetch($cacheable, false)
+        );
     }
 
     public function testFetchWithForceTrue()
@@ -92,7 +94,8 @@ class CacheManagerTest extends TestCase
         });
 
         $this->assertSame(
-            CacheableInterface::class . ' Callback!', $this->cacheManager->fetch($cacheable, true)
+            CacheableInterface::class . ' Callback!',
+            $this->cacheManager->fetch($cacheable, true)
         );
     }
 }

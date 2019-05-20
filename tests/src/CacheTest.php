@@ -24,7 +24,6 @@ class CacheTest extends TestCase
 
     public function setUp()
     {
-
         $items = [
             'foo' => 'fooValue',
             'bar' => 'barValue',
@@ -36,7 +35,7 @@ class CacheTest extends TestCase
         $this->cacheItemPool->method('commit')->willReturn(true);
         $this->cacheItemPool->method('clear')->willReturn(true);
         $this->cacheItemPool->method('hasItem')->willReturnCallback(function ($key) use ($items) {
-            if (array_key_exists($key, $items)) {
+            if (\array_key_exists($key, $items)) {
                 return true;
             }
             return false;
@@ -45,7 +44,7 @@ class CacheTest extends TestCase
         $this->cacheItemPool->method('getItem')->willReturnCallback(function ($key) use ($items) {
             $cacheItem = $this->createMock(CacheItemInterface::class);
             $cacheItem->method('get')->willReturnCallback(function () use ($items, $key) {
-                if (array_key_exists($key, $items)) {
+                if (\array_key_exists($key, $items)) {
                     return $items[$key];
                 }
             });
@@ -54,13 +53,12 @@ class CacheTest extends TestCase
             return $cacheItem;
         });
         $this->cacheItemPool->method('deleteItem')->willReturnCallback(function ($key) use ($items) {
-            if (array_key_exists($key, $items)) {
+            if (\array_key_exists($key, $items)) {
                 return true;
             }
             return false;
         });
         $this->cacheItemPool->method('saveDeferred')->willReturn(true);
-
     }
 
     public function testPool()
@@ -133,7 +131,7 @@ class CacheTest extends TestCase
 
         $keys = [
             'foo',
-            'bar'
+            'bar',
         ];
 
         $result = $cache->multiple($keys);
@@ -141,7 +139,6 @@ class CacheTest extends TestCase
         $this->assertIsArray($result);
         $this->assertArrayHasKey('foo', $result);
         $this->assertArrayHasKey('bar', $result);
-
     }
 
     public function testMultipleWithDefaults()
@@ -151,17 +148,17 @@ class CacheTest extends TestCase
         $keys = [
             'foo',
             'bar',
-            'default'
+            'default',
         ];
 
         $defaults = [
-            'default' => 'defaultValue'
+            'default' => 'defaultValue',
         ];
 
         $expected = [
             'foo' => 'fooValue',
             'bar' => 'barValue',
-            'default' => 'defaultValue'
+            'default' => 'defaultValue',
         ];
 
         $this->assertSame($expected, $cache->multiple($keys, $defaults));
@@ -195,12 +192,12 @@ class CacheTest extends TestCase
 
         $values = [
             'foo' => 'value1',
-            'bar' => 'value2'
+            'bar' => 'value2',
         ];
 
         $ttl = [
             'foo' => 1,
-            'bar' => 2
+            'bar' => 2,
         ];
 
         $this->assertNull($cache->putMultiple($values, $ttl));
@@ -247,7 +244,7 @@ class CacheTest extends TestCase
 
         $keys = [
             'foo',
-            'bar'
+            'bar',
         ];
 
         $this->assertNull($cache->deleteMultiple($keys));
@@ -279,11 +276,11 @@ class CacheTest extends TestCase
 
         $values = [
             'foo' => 'fooValue',
-            'bar' => 'barValue'
+            'bar' => 'barValue',
         ];
 
         $ttl = [
-            'foo' => 2
+            'foo' => 2,
         ];
 
         $this->assertNull($cache->putMultipleDeferred($values, $ttl));

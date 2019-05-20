@@ -29,18 +29,18 @@ class CacheItemPoolTest extends TestCase
     {
         $items = [
             'foo' => $this->createMock(CacheItemInterface::class),
-            'bar' => $this->createMock(CacheItemInterface::class)
+            'bar' => $this->createMock(CacheItemInterface::class),
         ];
 
         $cacheItemPool = $this->createMock(CacheItemPoolInterface::class);
         $cacheItemPool->method('getItem')->willReturnCallback(function ($key) use ($items) {
             return $items[$key];
         });
-        $cacheItemPool->method('getItems')->willReturnCallback(function ($keys) use ($items){
+        $cacheItemPool->method('getItems')->willReturnCallback(function ($keys) use ($items) {
             return $items;
         });
         $cacheItemPool->method('hasItem')->willReturnCallback(function ($key) use ($items) {
-            if (array_key_exists($key, $items)) {
+            if (\array_key_exists($key, $items)) {
                 return true;
             }
             return false;
@@ -69,7 +69,7 @@ class CacheItemPoolTest extends TestCase
     {
         $keys = [
             'foo',
-            'bar'
+            'bar',
         ];
 
         $this->assertIsArray($this->cacheItemPool->getItems($keys));

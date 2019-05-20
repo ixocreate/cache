@@ -120,8 +120,8 @@ final class Cache implements CacheInterface
      * @param string $key
      * @param $value
      * @param int|null $ttl
-     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
+     * @return bool
      */
     public function put(string $key, $value, int $ttl = null): bool
     {
@@ -145,8 +145,8 @@ final class Cache implements CacheInterface
 
     /**
      * @param string $key
-     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
+     * @return bool
      */
     public function delete(string $key): bool
     {
@@ -187,8 +187,8 @@ final class Cache implements CacheInterface
      * @param string $key
      * @param $value
      * @param int|null $ttl
-     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
+     * @return bool
      */
     public function putDeferred(string $key, $value, int $ttl = null): bool
     {
