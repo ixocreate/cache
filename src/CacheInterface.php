@@ -62,9 +62,10 @@ interface CacheInterface
      * @param string $key
      * @param $value
      * @param int|null $ttl
+     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function put(string $key, $value, int $ttl = null): void;
+    public function put(string $key, $value, int $ttl = null): bool;
 
     /**
      * @param array $values
@@ -75,9 +76,10 @@ interface CacheInterface
 
     /**
      * @param string $key
+     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function delete(string $key): void;
+    public function delete(string $key): bool;
 
     /**
      * @param array $keys
@@ -99,9 +101,10 @@ interface CacheInterface
      * @param string $key
      * @param $value
      * @param int|null $ttl
+     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function putDeferred(string $key, $value, int $ttl = null): void;
+    public function putDeferred(string $key, $value, int $ttl = null): bool;
 
     /**
      * @param array $values

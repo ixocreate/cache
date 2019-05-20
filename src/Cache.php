@@ -120,14 +120,15 @@ final class Cache implements CacheInterface
      * @param string $key
      * @param $value
      * @param int|null $ttl
+     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function put(string $key, $value, int $ttl = null): void
+    public function put(string $key, $value, int $ttl = null): bool
     {
         $item = $this->cacheItemPool->getItem($key);
         $item->set($value);
         $item->expiresAfter($ttl);
-        $this->cacheItemPool->save($item);
+        return $this->cacheItemPool->save($item);
     }
 
     /**
@@ -144,11 +145,12 @@ final class Cache implements CacheInterface
 
     /**
      * @param string $key
+     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function delete(string $key): void
+    public function delete(string $key): bool
     {
-        $this->cacheItemPool->deleteItem($key);
+        return $this->cacheItemPool->deleteItem($key);
     }
 
     /**
@@ -185,14 +187,15 @@ final class Cache implements CacheInterface
      * @param string $key
      * @param $value
      * @param int|null $ttl
+     * @return bool
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function putDeferred(string $key, $value, int $ttl = null): void
+    public function putDeferred(string $key, $value, int $ttl = null): bool
     {
         $item = $this->cacheItemPool->getItem($key);
         $item->set($value);
         $item->expiresAfter($ttl);
-        $this->cacheItemPool->saveDeferred($item);
+        return $this->cacheItemPool->saveDeferred($item);
     }
 
     /**
