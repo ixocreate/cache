@@ -177,7 +177,7 @@ final class Cache implements CacheInterface
      */
     public function prune(): void
     {
-        if ($this->cacheItemPool instanceof PruneableInterface) {
+        if ($this->cacheItemPool instanceof \Symfony\Component\Cache\PruneableInterface) {
             $this->cacheItemPool->prune();
             return;
         }

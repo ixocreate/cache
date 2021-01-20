@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-interface ResetableInterface
+use Symfony\Component\Cache\ResettableInterface;
+
+interface ResetableInterface extends ResettableInterface
 {
     public function reset(): void;
 }

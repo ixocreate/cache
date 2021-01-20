@@ -183,8 +183,6 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
     {
         if ($this->cacheItemPool instanceof \Symfony\Component\Cache\PruneableInterface) {
             $this->cacheItemPool->prune();
-        } elseif ($this->cacheItemPool instanceof PruneableInterface) {
-            $this->cacheItemPool->prune();
         }
     }
 
@@ -193,9 +191,7 @@ final class CacheItemPool implements CacheItemPoolInterface, PruneableInterface,
      */
     public function reset(): void
     {
-        if ($this->cacheItemPool instanceof ResetableInterface) {
-            $this->cacheItemPool->reset();
-        } elseif ($this->cacheItemPool instanceof ResettableInterface) {
+        if ($this->cacheItemPool instanceof ResettableInterface) {
             $this->cacheItemPool->reset();
         } elseif ($this->cacheItemPool instanceof ResetInterface) {
             $this->cacheItemPool->reset();

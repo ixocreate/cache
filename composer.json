@@ -12,19 +12,25 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2 || ^8.0",
         "psr/container": "~1.0",
-        "symfony/cache": "^4.2"
+        "symfony/cache": "^5.2"
     },
     "require-dev": {
         "ext-pdo": "*",
         "doctrine/dbal": "^2.9",
         "ixocreate/coding-standard": "^2.0",
-        "ixocreate/test": "dev-develop"
+        "ixocreate/test": "^0.1.1"
     },
     "autoload": {
         "psr-4": {
             "Ixocreate\\Cache\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ixocreate\\Misc\\Cache\\": "tests/misc/",
+            "Ixocreate\\Test\\Cache\\": "tests/src/"
         }
     },
     "config": {

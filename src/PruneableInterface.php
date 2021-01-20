@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Cache;
 
-interface PruneableInterface
+interface PruneableInterface extends \Symfony\Component\Cache\PruneableInterface
 {
     public function prune(): void;
 }

@@ -23,7 +23,7 @@ class CacheManagerTest extends TestCase
      */
     private $cacheManager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $cacheItemPoolTrue = $this->createMock(CacheItemPoolInterface::class);
         $cacheItemPoolTrue->method('hasItem')->willReturn(true);

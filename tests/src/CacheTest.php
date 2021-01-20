@@ -11,6 +11,7 @@ namespace Ixocreate\Test\Cache;
 
 use Ixocreate\Cache\Cache;
 use Ixocreate\Cache\PruneableInterface;
+use Ixocreate\Misc\Cache\IxocreateCacheItemPoolInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -22,12 +23,11 @@ class CacheTest extends TestCase
      */
     private $cacheItemPool;
 
-    public function setUp()
+    public function setUp(): void
     {
         $items = [
             'foo' => 'fooValue',
             'bar' => 'barValue',
-
         ];
 
         $this->cacheItemPool = $this->createMock(CacheItemPoolInterface::class);
@@ -72,18 +72,14 @@ class CacheTest extends TestCase
     {
         $cache = new Cache($this->cacheItemPool);
 
-        $key = 'foo';
-
-        $this->assertSame('fooValue', $cache->get($key));
+        $this->assertSame('fooValue', $cache->get('foo'));
     }
 
     public function testNegativeGetWithDefaultNull()
     {
         $cache = new Cache($this->cacheItemPool);
 
-        $key = 'wrong';
-
-        $this->assertNull($cache->get($key));
+        $this->assertNull($cache->get('wrong'));
     }
 
     public function testNegativeGetWithDefault()
@@ -178,9 +174,7 @@ class CacheTest extends TestCase
         $cache = new Cache($this->cacheItemPool);
 
         $key = 'key';
-
         $value = 'value';
-
         $ttl = 2;
 
         $this->assertTrue($cache->put($key, $value, $ttl));
@@ -205,24 +199,26 @@ class CacheTest extends TestCase
 
     public function testPositiveDelete()
     {
+        $this->cacheItemPool->expects($this->once())->method('deleteItem');
+
         $cache = new Cache($this->cacheItemPool);
 
-        $key = 'foo';
-
-        $this->assertTrue($cache->delete($key));
+        $this->assertTrue($cache->delete('foo'));
     }
 
     public function testNegativeDelete()
     {
+        $this->cacheItemPool->expects($this->once())->method('deleteItem');
+
         $cache = new Cache($this->cacheItemPool);
 
-        $key = 'wrong';
-
-        $this->assertFalse($cache->delete($key));
+        $this->assertFalse($cache->delete('wrong'));
     }
 
     public function testCommit()
     {
+        $this->cacheItemPool->expects($this->once())->method('commit');
+
         $cache = new Cache($this->cacheItemPool);
 
         $this->assertTrue($cache->commit());
@@ -230,12 +226,12 @@ class CacheTest extends TestCase
 
     public function testPrune()
     {
-        $cacheItemPool = $this->createMock([CacheItemPoolInterface::class, PruneableInterface::class]);
-        $cacheItemPool->method('prune')->willReturn(null);
+        $cacheItemPool = $this->createMock(IxocreateCacheItemPoolInterface::class);
+        $cacheItemPool->expects($this->once())->method('prune');
 
         $cache = new Cache($cacheItemPool);
 
-        $this->assertNull($cache->prune());
+        $cache->prune();
     }
 
     public function testDeleteMultiple()

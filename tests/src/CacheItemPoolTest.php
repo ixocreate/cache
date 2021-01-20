@@ -11,6 +11,8 @@ namespace Ixocreate\Test\Cache;
 
 use Ixocreate\Cache\CacheItemPool;
 use Ixocreate\Cache\ResetableInterface;
+use Ixocreate\Misc\Cache\IxocreateCacheItemPoolInterface;
+use Ixocreate\Misc\Cache\SymfonyCacheItemPoolInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -25,7 +27,7 @@ class CacheItemPoolTest extends TestCase
      */
     private $cacheItemPool;
 
-    public function setUp()
+    public function setUp(): void
     {
         $items = [
             'foo' => $this->createMock(CacheItemInterface::class),
@@ -116,33 +118,31 @@ class CacheItemPoolTest extends TestCase
 
     public function testPrune()
     {
-        $symfonyPrune = $this->createMock([CacheItemPoolInterface::class, PruneableInterface::class]);
-        $symfonyPrune->method('prune');
+        $symfonyPrune = $this->createMock(SymfonyCacheItemPoolInterface::class);
+        $symfonyPrune->expects($this->once())->method('prune');
 
-        $ixoPrune = $this->createMock([CacheItemPoolInterface::class ,\Ixocreate\Cache\PruneableInterface::class]);
-        $ixoPrune->method('prune');
+        $ixoPrune = $this->createMock(IxocreateCacheItemPoolInterface::class);
+        $ixoPrune->expects($this->once())->method('prune')->willReturnCallback(function () {});
 
         $symfonyCacheItemPool = new CacheItemPool($symfonyPrune);
-
         $ixoCacheItemPool = new CacheItemPool($ixoPrune);
 
-        $this->assertNull($symfonyCacheItemPool->prune());
-
-        $this->assertNull($ixoCacheItemPool->prune());
+        $symfonyCacheItemPool->prune();
+        $ixoCacheItemPool->prune();
     }
 
     public function testReset()
     {
-        $symfonyResettable = $this->createMock([CacheItemPoolInterface::class, ResettableInterface::class]);
-        $symfonyReset = $this->createMock([CacheItemPoolInterface::class, ResetInterface::class]);
-        $ixoReset = $this->createMock([CacheItemPoolInterface::class, ResetableInterface::class]);
+        $symfonyResettable = $this->createMock(SymfonyCacheItemPoolInterface::class);
+        $symfonyResettable->expects($this->once())->method('reset');
+
+        $ixoReset = $this->createMock(IxocreateCacheItemPoolInterface::class);
+        $ixoReset->expects($this->once())->method('reset');
 
         $symfonyResettableCacheItemPool = new CacheItemPool($symfonyResettable);
-        $symfonyResetCacheItemPool = new CacheItemPool($symfonyReset);
         $ixoResetCacheItemPool = new CacheItemPool($ixoReset);
 
-        $this->assertNull($symfonyResettableCacheItemPool->reset());
-        $this->assertNull($symfonyResetCacheItemPool->reset());
-        $this->assertNull($ixoResetCacheItemPool->reset());
+        $symfonyResettableCacheItemPool->reset();
+        $ixoResetCacheItemPool->reset();
     }
 }
