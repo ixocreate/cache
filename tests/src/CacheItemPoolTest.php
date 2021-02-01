@@ -10,15 +10,11 @@ declare(strict_types=1);
 namespace Ixocreate\Test\Cache;
 
 use Ixocreate\Cache\CacheItemPool;
-use Ixocreate\Cache\ResetableInterface;
 use Ixocreate\Misc\Cache\IxocreateCacheItemPoolInterface;
 use Ixocreate\Misc\Cache\SymfonyCacheItemPoolInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Component\Cache\PruneableInterface;
-use Symfony\Component\Cache\ResettableInterface;
-use Symfony\Contracts\Service\ResetInterface;
 
 class CacheItemPoolTest extends TestCase
 {
@@ -122,7 +118,8 @@ class CacheItemPoolTest extends TestCase
         $symfonyPrune->expects($this->once())->method('prune');
 
         $ixoPrune = $this->createMock(IxocreateCacheItemPoolInterface::class);
-        $ixoPrune->expects($this->once())->method('prune')->willReturnCallback(function () {});
+        $ixoPrune->expects($this->once())->method('prune')->willReturnCallback(function () {
+        });
 
         $symfonyCacheItemPool = new CacheItemPool($symfonyPrune);
         $ixoCacheItemPool = new CacheItemPool($ixoPrune);

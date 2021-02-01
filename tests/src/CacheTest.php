@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Ixocreate\Test\Cache;
 
 use Ixocreate\Cache\Cache;
-use Ixocreate\Cache\PruneableInterface;
 use Ixocreate\Misc\Cache\IxocreateCacheItemPoolInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;

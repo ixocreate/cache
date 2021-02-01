@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOLIT GmbH
+ * @license MIT License
+ */
 
 declare(strict_types=1);
 
@@ -10,5 +15,4 @@ use Psr\Cache\CacheItemPoolInterface;
 
 interface IxocreateCacheItemPoolInterface extends CacheItemPoolInterface, ResetableInterface, PruneableInterface
 {
-
 }
