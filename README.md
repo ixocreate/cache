@@ -1,6 +1,6 @@
 # IXOCREATE Cache Library
 
-[![Build Status](https://travis-ci.org/ixocreate/cache.svg?branch=master)](https://travis-ci.org/ixocreate/cache)
+[![Build Status](https://travis-ci.com/ixocreate/cache.svg?branch=master)](https://travis-ci.com/ixocreate/cache)
 [![Coverage Status](https://coveralls.io/repos/github/ixocreate/cache/badge.svg?branch=master)](https://coveralls.io/github/ixocreate/cache?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/ixocreate/cache.svg)](https://packagist.org/packages/ixocreate/cache)
 [![PHP Version](https://img.shields.io/packagist/php-v/ixocreate/cache.svg)](https://packagist.org/packages/ixocreate/cache)
